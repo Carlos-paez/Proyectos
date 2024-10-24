@@ -113,6 +113,8 @@ def limpiar_base_datos():
         if entry_usuario.get() == "admin" and entry_contrasena.get() == "conver":
             cursor.execute('DELETE FROM inspecciones')
             conexion.commit()
+            cursor.execute('VACUUM')  # Esto reinicia el contador de AUTOINCREMENT
+            conexion.commit()
             label_error.config(text="Base de datos limpiada exitosamente.")
             ventana_credenciales.destroy()
         else:
